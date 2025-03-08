@@ -25,5 +25,7 @@ class Blackjack(nombre: String, monto: Int) : Juego(nombre, monto) {
         return Random.nextInt(4, 22)
     }
 
-    override fun mostrarResultados() {}
+    override fun mostrarResultados() {
+        println(ultimoResultado)
+    }
 }

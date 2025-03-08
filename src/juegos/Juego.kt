@@ -2,6 +2,8 @@ package juegos
 
 abstract class Juego (val nombre : String, var monto : Int){
 
+    var ultimoResultado: String = "Aún no hay resultados."
+
     abstract fun iniciarJuego()
 
     fun apostar(cantidad: Int): Boolean {

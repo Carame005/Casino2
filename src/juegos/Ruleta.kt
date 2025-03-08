@@ -23,5 +23,7 @@ class Ruleta(nombre: String, monto: Int) : Juego(nombre, monto) {
     }
 
     private fun girarRuleta() = Random.nextInt(0, 37)
-    override fun mostrarResultados() {}
+    override fun mostrarResultados() {
+        println(ultimoResultado)
+    }
 }

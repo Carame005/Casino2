@@ -20,6 +20,7 @@ fun main() {
         when (opcion) {
             in 1..4 -> casino[opcion - 1].iniciarJuego()
             5 -> break
+            6 -> casino.forEach { it.mostrarResultados()}
             else -> println("Opción no válida")
         }
 

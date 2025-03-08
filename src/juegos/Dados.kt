@@ -20,5 +20,7 @@ class Dados(nombre: String, monto: Int) : Juego(nombre, monto) {
     }
 
     private fun tirarDados() = arrayOf(Random.nextInt(1, 7), Random.nextInt(1, 7))
-    override fun mostrarResultados() {}
+    override fun mostrarResultados() {
+        println(ultimoResultado)
+    }
 }

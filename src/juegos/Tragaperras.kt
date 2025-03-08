@@ -24,5 +24,7 @@ class Tragaperras(nombre: String, monto: Int) : Juego(nombre, monto) {
         return Array(3) { simbolos.random() }
     }
 
-    override fun mostrarResultados() {}
+    override fun mostrarResultados() {
+        println(ultimoResultado)
+    }
 }
