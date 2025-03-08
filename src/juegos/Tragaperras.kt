@@ -1,30 +1,31 @@
 package juegos
-import kotlin.random.Random
+import economia.Ficha
 
-class Tragaperras(nombre: String, monto: Int) : Juego(nombre, monto) {
+class Tragaperras : Juego("Tragaperras") {
     override fun iniciarJuego() {
-        println("Ingrese una cantidad a apostar: ")
-        var cantidad: Int
-        do {
-            cantidad = readLine()!!.toInt()
-        } while (!apostar(cantidad))
+        println("Ingrese el valor de la ficha a apostar: ")
+        val cantidad = readLine()!!.toInt()
+        val ficha = Ficha(cantidad)
 
-        val resultado = girarRuleta()
-        println("Resultado: ${resultado.joinToString(" ")}")
-        if (resultado.distinct().size == 1) {
-            println("¡Ganaste!")
-            monto += cantidad * 5
-        } else {
-            println("Perdiste :(")
+        if (apostar(ficha)) {
+            val resultado = girarRuleta().joinToString(" ")
+            println("Tragaperras: $resultado")
+
+            if (resultado.distinct().size == 1) {
+                bolsaDeFichas.agregarFicha(Ficha(cantidad * 5))
+                println("¡Ganaste! Te llevas ${cantidad * 5} créditos en fichas.")
+            } else {
+                println("Perdiste la apuesta.")
+            }
         }
     }
 
     private fun girarRuleta(): Array<String> {
-        val simbolos = arrayOf("☆", "♕", "☺", "♢")
-        return Array(3) { simbolos.random() }
+        val SIMBOLOS = arrayOf("☆", "♕", "☺", "♢")
+        return Array(3) { SIMBOLOS.random() }
     }
 
     override fun mostrarResultados() {
-        println(ultimoResultado)
+        bolsaDeFichas.mostrarFichas()
     }
 }

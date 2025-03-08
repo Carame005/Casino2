@@ -1,26 +1,30 @@
 package juegos
-import kotlin.random.Random
+import economia.Ficha
 
-class Dados(nombre: String, monto: Int) : Juego(nombre, monto) {
+class Dados : Juego("Dados") {
     override fun iniciarJuego() {
-        println("Ingrese una cantidad a apostar: ")
-        var cantidad: Int
-        do {
-            cantidad = readLine()!!.toInt()
-        } while (!apostar(cantidad))
+        println("Ingrese el valor de la ficha a apostar: ")
+        val cantidad = readLine()!!.toInt()
+        val ficha = Ficha(cantidad)
 
-        val resultado = tirarDados()
-        println("Resultado: ${resultado[0]} y ${resultado[1]}")
-        if (resultado.sum() > 7) {
-            println("¡Ganaste!")
-            monto += cantidad * 2
-        } else {
-            println("Perdiste :(")
+        if (apostar(ficha)) {
+            val resultado = tirarDados()
+            println("Tiraste los dados y obtuviste: $resultado")
+
+            if (resultado > 7) {
+                bolsaDeFichas.agregarFicha(Ficha(cantidad * 2))
+                println("¡Ganaste! Se te agregan ${cantidad * 2} créditos en fichas.")
+            } else {
+                println("Perdiste la apuesta.")
+            }
         }
     }
 
-    private fun tirarDados() = arrayOf(Random.nextInt(1, 7), Random.nextInt(1, 7))
+    private fun tirarDados(): Int {
+        return (1..6).random() + (1..6).random()
+    }
+
     override fun mostrarResultados() {
-        println(ultimoResultado)
+        bolsaDeFichas.mostrarFichas()
     }
 }

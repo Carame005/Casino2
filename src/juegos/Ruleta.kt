@@ -1,29 +1,33 @@
 package juegos
-import kotlin.random.Random
+import economia.Ficha
 
-class Ruleta(nombre: String, monto: Int) : Juego(nombre, monto) {
+class Ruleta : Juego("Ruleta") {
     override fun iniciarJuego() {
-        println("Ingrese una cantidad a apostar: ")
-        var cantidad: Int
-        do {
-            cantidad = readLine()!!.toInt()
-        } while (!apostar(cantidad))
+        println("Ingrese el valor de la ficha a apostar: ")
+        val cantidad = readLine()!!.toInt()
+        val ficha = Ficha(cantidad)
 
-        println("Apuesta por un número (0-36) o 'rojo'/'negro': ")
-        val apuesta = readLine()!!
-        val resultado = girarRuleta()
+        if (apostar(ficha)) {
+            println("Elige un número entre 0 y 36:")
+            val apuestaNumero = readLine()!!.toInt()
 
-        println("Resultado: $resultado")
-        if (apuesta == resultado.toString() || (apuesta == "rojo" && resultado % 2 == 1) || (apuesta == "negro" && resultado % 2 == 0)) {
-            println("¡Ganaste!")
-            monto += cantidad * 2
-        } else {
-            println("Perdiste :(")
+            val resultado = girarRuleta()
+            println("La ruleta cayó en el número: $resultado")
+
+            if (apuestaNumero == resultado) {
+                bolsaDeFichas.agregarFicha(Ficha(cantidad * 10))
+                println("¡Ganaste! Se te agregan ${cantidad * 10} créditos en fichas.")
+            } else {
+                println("No acertaste. Perdiste la apuesta.")
+            }
         }
     }
 
-    private fun girarRuleta() = Random.nextInt(0, 37)
+    private fun girarRuleta(): Int {
+        return (0..36).random()
+    }
+
     override fun mostrarResultados() {
-        println(ultimoResultado)
+        bolsaDeFichas.mostrarFichas()
     }
 }

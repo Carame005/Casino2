@@ -1,30 +1,21 @@
 package juegos
+import economia.BolsaDeFichas
+import economia.Ficha
 
-abstract class Juego (val nombre : String, var monto : Int){
-
-    var ultimoResultado: String = "Aún no hay resultados."
+abstract class Juego(val nombre: String) {
+    val bolsaDeFichas = BolsaDeFichas<Int>()
 
     abstract fun iniciarJuego()
 
-    fun apostar(cantidad: Int): Boolean {
-        return if (cantidad <= monto) {
-            monto -= cantidad
+    fun apostar(ficha: Ficha<Int>): Boolean {
+        return if (bolsaDeFichas.quitarFicha(ficha)) {
+            println("Apostaste una ficha de ${ficha.valor} créditos.")
             true
         } else {
+            println("No tienes fichas suficientes para apostar.")
             false
         }
     }
-
-
-    fun esPar(numero : Int) : Boolean{
-        return if (numero % 2 == 0){
-            true
-        } else{
-            false
-        }
-    }
-
 
     abstract fun mostrarResultados()
-
 }

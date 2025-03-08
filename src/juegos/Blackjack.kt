@@ -1,31 +1,39 @@
 package juegos
-import kotlin.random.Random
+import economia.Ficha
 
-class Blackjack(nombre: String, monto: Int) : Juego(nombre, monto) {
+class Blackjack : Juego("Blackjack") {
     override fun iniciarJuego() {
-        println("Ingrese una cantidad a apostar: ")
-        var cantidad: Int
-        do {
-            cantidad = readLine()!!.toInt()
-        } while (!apostar(cantidad))
+        println("Ingrese el valor de la ficha a apostar: ")
+        val cantidad = readLine()!!.toInt()
+        val ficha = Ficha(cantidad)
 
-        val jugador = generarCartas()
-        println("Tus cartas suman: $jugador")
-        if (jugador == 21) {
-            println("¡Blackjack! Ganaste.")
-            monto += cantidad * 3
-        } else if (jugador > 21) {
-            println("Te pasaste. Perdiste :(")
-        } else {
-            println("No hiciste Blackjack. Perdiste :(")
+        if (apostar(ficha)) {
+            val resultadoJugador = generarCartas()
+            val resultadoCrupier = generarCartas()
+
+            println("Tu mano: $resultadoJugador")
+            println("Mano del crupier: $resultadoCrupier")
+
+            when {
+                resultadoJugador > 21 -> println("Te pasaste de 21. Pierdes.")
+                resultadoCrupier > 21 || resultadoJugador > resultadoCrupier -> {
+                    bolsaDeFichas.agregarFicha(Ficha(cantidad * 2))
+                    println("¡Ganaste! Se te agregan ${cantidad * 2} créditos en fichas.")
+                }
+                resultadoJugador == resultadoCrupier -> {
+                    bolsaDeFichas.agregarFicha(Ficha(cantidad)) // Se devuelve la apuesta
+                    println("Empate. Te devolvemos tu apuesta.")
+                }
+                else -> println("El crupier gana. Perdiste la apuesta.")
+            }
         }
     }
 
     private fun generarCartas(): Int {
-        return Random.nextInt(4, 22)
+        return (1..11).random() + (1..11).random()
     }
 
     override fun mostrarResultados() {
-        println(ultimoResultado)
+        bolsaDeFichas.mostrarFichas()
     }
 }
