@@ -27,6 +27,8 @@ class Ruleta(nombre: String) : Juego(nombre) {
             bolsaDeFichas.agregarFicha(Ficha(premio))
         } else {
             println("😢 No acertaste esta vez.")
+            bolsaDeFichas.agregarFicha(Ficha(-ficha.valor))
         }
+        readln()
     }
 }

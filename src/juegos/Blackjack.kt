@@ -22,8 +22,13 @@ class Blackjack(nombre: String) : Juego(nombre) {
                 println("🎉 Ganaste! Recibes $premio fichas.")
                 bolsaDeFichas.agregarFicha(Ficha(premio))
             }
-            else -> println("🏠 La casa gana. Perdiste ${ficha.valor} fichas.")
+
+            else -> {
+                println("🏠 La casa gana. Perdiste ${ficha.valor} fichas.")
+                bolsaDeFichas.agregarFicha(Ficha(-ficha.valor))
+            }
         }
+        readln()
     }
 }
 

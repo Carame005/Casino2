@@ -18,7 +18,9 @@ class Tragaperras(nombre: String) : Juego(nombre) {
             bolsaDeFichas.agregarFicha(Ficha(premio))
         } else {
             println("😢 No ganaste esta vez.")
+            bolsaDeFichas.agregarFicha(Ficha(-ficha.valor))
         }
+        readln()
     }
 
     private fun girarRuleta(): Array<String> {

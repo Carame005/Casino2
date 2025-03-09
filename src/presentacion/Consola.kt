@@ -22,6 +22,7 @@ class Consola() {
         )
 
         while (bolsaDeFichas.totalFichas() > 0) {
+            limpiarPantalla()
             println("\n🎰 Bienvenido al Casino! Elige un juego:")
             casino.forEachIndexed { index, juego ->
                 println("${index + 1}. ${juego.nombre}")
@@ -36,7 +37,11 @@ class Consola() {
                 else -> println("❌ Opción no válida")
             }
         }
-        println("\n🏁 El juego ha terminado. Te has quedado sin fichas.")
+        println("\n🏁 El juego ha terminado. Te has quedado con ${bolsaDeFichas.totalFichas()} fichas.")
+    }
+
+    fun limpiarPantalla() {
+        repeat(50) { println() } // Imprime 50 líneas en blanco para "borrar" la pantalla
     }
 
 }

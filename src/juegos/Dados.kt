@@ -21,8 +21,13 @@ class Dados(nombre: String) : Juego(nombre) {
                 println("🎉 ¡Ganaste! Recibes $premio fichas.")
                 bolsaDeFichas.agregarFicha(Ficha(premio))
             }
-            else -> println("😢 No ganaste esta vez.")
+
+            else -> {
+                println("😢 No ganaste esta vez.")
+                bolsaDeFichas.agregarFicha(Ficha(-ficha.valor))
+            }
         }
+        readln()
     }
 }
 
