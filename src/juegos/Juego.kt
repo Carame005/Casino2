@@ -8,14 +8,32 @@ abstract class Juego(val nombre: String) {
     abstract fun iniciarJuego()
 
     fun apostar(ficha: Ficha<Int>): Boolean {
-        return if (bolsaDeFichas.quitarFicha(ficha)) {
-            println("Apostaste una ficha de ${ficha.valor} créditos.")
-            true
+        if (bolsaDeFichas.totalFichas() >= ficha.valor) {
+            bolsaDeFichas.quitarFicha(ficha)
+            return true
         } else {
-            println("No tienes fichas suficientes para apostar.")
-            false
+            println("⚠ No tienes suficientes fichas para apostar esa cantidad.")
+            return false
         }
     }
+
+
+
+    fun solicitarFicha(): Ficha<Int> {
+        while (true) {
+            println("Ingrese el valor de la ficha a apostar: ")
+            val input = readLine()
+
+            val cantidad = input?.toIntOrNull()
+            if (cantidad == null || cantidad <= 0) {
+                println("⚠ Error: Ingrese un número válido mayor que 0.")
+                continue
+            }
+
+            return Ficha(cantidad)
+        }
+    }
+
 
     abstract fun mostrarResultados()
 }

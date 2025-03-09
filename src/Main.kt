@@ -2,11 +2,11 @@ import juegos.Ruleta
 import juegos.Dados
 import juegos.Blackjack
 import juegos.Tragaperras
+import economia.Ficha
 
 fun main() {
     val casino = listOf(Tragaperras(), Dados(), Blackjack(), Ruleta())
 
-    // Agregar fichas iniciales
     casino.forEach { juego ->
         juego.bolsaDeFichas.agregarFicha(Ficha(100))
         juego.bolsaDeFichas.agregarFicha(Ficha(50))

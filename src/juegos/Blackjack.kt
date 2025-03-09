@@ -3,10 +3,7 @@ import economia.Ficha
 
 class Blackjack : Juego("Blackjack") {
     override fun iniciarJuego() {
-        println("Ingrese el valor de la ficha a apostar: ")
-        val cantidad = readLine()!!.toInt()
-        val ficha = Ficha(cantidad)
-
+        val ficha = solicitarFicha()
         if (apostar(ficha)) {
             val resultadoJugador = generarCartas()
             val resultadoCrupier = generarCartas()
@@ -17,17 +14,19 @@ class Blackjack : Juego("Blackjack") {
             when {
                 resultadoJugador > 21 -> println("Te pasaste de 21. Pierdes.")
                 resultadoCrupier > 21 || resultadoJugador > resultadoCrupier -> {
-                    bolsaDeFichas.agregarFicha(Ficha(cantidad * 2))
-                    println("¡Ganaste! Se te agregan ${cantidad * 2} créditos en fichas.")
+                    val ganancia = ficha.valor * 2
+                    bolsaDeFichas.agregarFicha(Ficha(ganancia))
+                    println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
                 }
                 resultadoJugador == resultadoCrupier -> {
-                    bolsaDeFichas.agregarFicha(Ficha(cantidad)) // Se devuelve la apuesta
+                    bolsaDeFichas.agregarFicha(ficha) // Se devuelve la apuesta en caso de empate
                     println("Empate. Te devolvemos tu apuesta.")
                 }
                 else -> println("El crupier gana. Perdiste la apuesta.")
             }
         }
     }
+
 
     private fun generarCartas(): Int {
         return (1..11).random() + (1..11).random()

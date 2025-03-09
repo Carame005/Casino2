@@ -3,22 +3,22 @@ import economia.Ficha
 
 class Tragaperras : Juego("Tragaperras") {
     override fun iniciarJuego() {
-        println("Ingrese el valor de la ficha a apostar: ")
-        val cantidad = readLine()!!.toInt()
-        val ficha = Ficha(cantidad)
-
+        val ficha = solicitarFicha()
         if (apostar(ficha)) {
-            val resultado = girarRuleta().joinToString(" ")
-            println("Tragaperras: $resultado")
+            val resultado = girarRuleta()
+            println("Tragaperras: ${resultado.joinToString(" ")}")
 
             if (resultado.distinct().size == 1) {
-                bolsaDeFichas.agregarFicha(Ficha(cantidad * 5))
-                println("¡Ganaste! Te llevas ${cantidad * 5} créditos en fichas.")
+                val ganancia = ficha.valor * 5
+                bolsaDeFichas.agregarFicha(Ficha(ganancia))
+                println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
             } else {
                 println("Perdiste la apuesta.")
             }
         }
     }
+
+
 
     private fun girarRuleta(): Array<String> {
         val SIMBOLOS = arrayOf("☆", "♕", "☺", "♢")
@@ -29,3 +29,4 @@ class Tragaperras : Juego("Tragaperras") {
         bolsaDeFichas.mostrarFichas()
     }
 }
+

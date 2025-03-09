@@ -3,10 +3,7 @@ import economia.Ficha
 
 class Ruleta : Juego("Ruleta") {
     override fun iniciarJuego() {
-        println("Ingrese el valor de la ficha a apostar: ")
-        val cantidad = readLine()!!.toInt()
-        val ficha = Ficha(cantidad)
-
+        val ficha = solicitarFicha()
         if (apostar(ficha)) {
             println("Elige un número entre 0 y 36:")
             val apuestaNumero = readLine()!!.toInt()
@@ -15,8 +12,9 @@ class Ruleta : Juego("Ruleta") {
             println("La ruleta cayó en el número: $resultado")
 
             if (apuestaNumero == resultado) {
-                bolsaDeFichas.agregarFicha(Ficha(cantidad * 10))
-                println("¡Ganaste! Se te agregan ${cantidad * 10} créditos en fichas.")
+                val ganancia = ficha.valor * 10
+                bolsaDeFichas.agregarFicha(Ficha(ganancia))
+                println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
             } else {
                 println("No acertaste. Perdiste la apuesta.")
             }
