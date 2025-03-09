@@ -1,38 +1,29 @@
 package juegos
 import economia.Ficha
+import economia.BolsaDeFichas
 
-class Blackjack : Juego("Blackjack") {
-    override fun iniciarJuego() {
+class Blackjack(nombre: String) : Juego(nombre) {
+    override fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>) {
+        println("🃏 Bienvenido a $nombre")
         val ficha = solicitarFicha()
-        if (apostar(ficha)) {
-            val resultadoJugador = generarCartas()
-            val resultadoCrupier = generarCartas()
 
-            println("Tu mano: $resultadoJugador")
-            println("Mano del crupier: $resultadoCrupier")
+        if (!apostar(bolsaDeFichas, ficha)) return
 
-            when {
-                resultadoJugador > 21 -> println("Te pasaste de 21. Pierdes.")
-                resultadoCrupier > 21 || resultadoJugador > resultadoCrupier -> {
-                    val ganancia = ficha.valor * 2
-                    bolsaDeFichas.agregarFicha(Ficha(ganancia))
-                    println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
-                }
-                resultadoJugador == resultadoCrupier -> {
-                    bolsaDeFichas.agregarFicha(ficha) // Se devuelve la apuesta en caso de empate
-                    println("Empate. Te devolvemos tu apuesta.")
-                }
-                else -> println("El crupier gana. Perdiste la apuesta.")
+        val jugador = (1..11).random() + (1..11).random()
+        val casa = (1..11).random() + (1..11).random()
+
+        println("🃏 Tus cartas suman: $jugador")
+        println("🏠 La casa tiene: $casa")
+
+        when {
+            jugador > 21 -> println("💥 Te pasaste de 21. Perdiste ${ficha.valor} fichas.")
+            casa > 21 || jugador > casa -> {
+                val premio = ficha.valor * 2
+                println("🎉 Ganaste! Recibes $premio fichas.")
+                bolsaDeFichas.agregarFicha(Ficha(premio))
             }
+            else -> println("🏠 La casa gana. Perdiste ${ficha.valor} fichas.")
         }
     }
-
-
-    private fun generarCartas(): Int {
-        return (1..11).random() + (1..11).random()
-    }
-
-    override fun mostrarResultados() {
-        bolsaDeFichas.mostrarFichas()
-    }
 }
+

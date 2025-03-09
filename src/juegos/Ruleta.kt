@@ -1,31 +1,32 @@
 package juegos
 import economia.Ficha
+import economia.BolsaDeFichas
 
-class Ruleta : Juego("Ruleta") {
-    override fun iniciarJuego() {
+class Ruleta(nombre: String) : Juego(nombre) {
+    override fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>) {
+        println("🎡 Bienvenido a $nombre")
         val ficha = solicitarFicha()
-        if (apostar(ficha)) {
-            println("Elige un número entre 0 y 36:")
-            val apuestaNumero = readLine()!!.toInt()
 
-            val resultado = girarRuleta()
-            println("La ruleta cayó en el número: $resultado")
+        if (!apostar(bolsaDeFichas, ficha)) return
 
-            if (apuestaNumero == resultado) {
-                val ganancia = ficha.valor * 10
-                bolsaDeFichas.agregarFicha(Ficha(ganancia))
-                println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
-            } else {
-                println("No acertaste. Perdiste la apuesta.")
-            }
+        println("Elige un número entre 0 y 36:")
+        val numeroElegido = readLine()?.toIntOrNull() ?: -1
+
+        if (numeroElegido !in 0..36) {
+            println("❌ Número fuera de rango. Se cancela la apuesta.")
+            bolsaDeFichas.agregarFicha(ficha)
+            return
         }
-    }
 
-    private fun girarRuleta(): Int {
-        return (0..36).random()
-    }
+        val resultado = (0..36).random()
+        println("🎡 La ruleta gira... y cae en el número: $resultado")
 
-    override fun mostrarResultados() {
-        bolsaDeFichas.mostrarFichas()
+        if (numeroElegido == resultado) {
+            val premio = ficha.valor * 36
+            println("🎉 ¡Acertaste! Ganaste $premio fichas.")
+            bolsaDeFichas.agregarFicha(Ficha(premio))
+        } else {
+            println("😢 No acertaste esta vez.")
+        }
     }
 }

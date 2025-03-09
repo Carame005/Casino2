@@ -2,21 +2,19 @@ package juegos
 import economia.BolsaDeFichas
 import economia.Ficha
 
+
 abstract class Juego(val nombre: String) {
-    val bolsaDeFichas = BolsaDeFichas<Int>()
+    abstract fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>)
 
-    abstract fun iniciarJuego()
-
-    fun apostar(ficha: Ficha<Int>): Boolean {
-        if (bolsaDeFichas.totalFichas() >= ficha.valor) {
-            bolsaDeFichas.quitarFicha(ficha)
-            return true
+    fun apostar(bolsaDeFichas: BolsaDeFichas<Int>, ficha: Ficha<Int>): Boolean {
+        return if (bolsaDeFichas.quitarFichas(ficha.valor)) {
+            println("💰 Apostaste ${ficha.valor} fichas.")
+            true
         } else {
             println("⚠ No tienes suficientes fichas para apostar esa cantidad.")
-            return false
+            false
         }
     }
-
 
 
     fun solicitarFicha(): Ficha<Int> {
@@ -33,7 +31,4 @@ abstract class Juego(val nombre: String) {
             return Ficha(cantidad)
         }
     }
-
-
-    abstract fun mostrarResultados()
 }

@@ -1,32 +1,28 @@
 package juegos
 import economia.Ficha
+import economia.BolsaDeFichas
 
-class Tragaperras : Juego("Tragaperras") {
-    override fun iniciarJuego() {
+class Tragaperras(nombre: String) : Juego(nombre) {
+    override fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>) {
+        println("🎰 Bienvenido a $nombre")
         val ficha = solicitarFicha()
-        if (apostar(ficha)) {
-            val resultado = girarRuleta()
-            println("Tragaperras: ${resultado.joinToString(" ")}")
 
-            if (resultado.distinct().size == 1) {
-                val ganancia = ficha.valor * 5
-                bolsaDeFichas.agregarFicha(Ficha(ganancia))
-                println("¡Ganaste! Se te agregan $ganancia créditos en fichas.")
-            } else {
-                println("Perdiste la apuesta.")
-            }
+        if (!apostar(bolsaDeFichas, ficha)) return
+
+        val resultado = girarRuleta()
+        println("🎰 Resultado: ${resultado.joinToString(" ")}")
+
+        if (resultado.distinct().size == 1) {
+            val premio = ficha.valor * 5
+            println("🎉 Jackpot! Ganaste $premio fichas.")
+            bolsaDeFichas.agregarFicha(Ficha(premio))
+        } else {
+            println("😢 No ganaste esta vez.")
         }
     }
 
-
-
     private fun girarRuleta(): Array<String> {
-        val SIMBOLOS = arrayOf("☆", "♕", "☺", "♢")
-        return Array(3) { SIMBOLOS.random() }
-    }
-
-    override fun mostrarResultados() {
-        bolsaDeFichas.mostrarFichas()
+        val SIMBOLOS_DE_RULETA = arrayOf("☆", "♕", "☺", "♢", "7")
+        return Array(3) { SIMBOLOS_DE_RULETA.random() }
     }
 }
-

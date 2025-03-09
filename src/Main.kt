@@ -3,31 +3,37 @@ import juegos.Dados
 import juegos.Blackjack
 import juegos.Tragaperras
 import economia.Ficha
+import economia.BolsaDeFichas
 
 fun main() {
-    val casino = listOf(Tragaperras(), Dados(), Blackjack(), Ruleta())
+    val bolsaDeFichas = BolsaDeFichas<Int>() // Instancia única para todos los juegos
+    bolsaDeFichas.agregarFicha(Ficha(100)) // Se agregan fichas iniciales
+    bolsaDeFichas.agregarFicha(Ficha(50))
+    bolsaDeFichas.agregarFicha(Ficha(20))
 
-    casino.forEach { juego ->
-        juego.bolsaDeFichas.agregarFicha(Ficha(100))
-        juego.bolsaDeFichas.agregarFicha(Ficha(50))
-        juego.bolsaDeFichas.agregarFicha(Ficha(20))
-    }
+    val casino = listOf(
+        Tragaperras("Tragaperras"),
+        Dados("Dados"),
+        Blackjack("Blackjack"),
+        Ruleta("Ruleta")
+    )
 
-    while (true) {
-        println("\nBienvenido al Casino! Elige un juego:")
+    while (bolsaDeFichas.totalFichas() > 0) {
+        println("\n🎰 Bienvenido al Casino! Elige un juego:")
         casino.forEachIndexed { index, juego ->
-            println("${index + 1}. ${juego.nombre} (Fichas disponibles: ${juego.bolsaDeFichas.totalFichas()})")
+            println("${index + 1}. ${juego.nombre}")
         }
         println("5. Salir")
-        println("6. Mostrar fichas")
+        println("Fichas disponibles: ${bolsaDeFichas.totalFichas()}")
 
-        val opcion = readLine()!!.toInt()
+        val opcion = readLine()?.toIntOrNull() ?: -1
         when (opcion) {
-            in 1..4 -> casino[opcion - 1].iniciarJuego()
+            in 1..4 -> casino[opcion - 1].iniciarJuego(bolsaDeFichas)
             5 -> break
-            6 -> casino.forEach { it.mostrarResultados() }
-            else -> println("Opción no válida")
+            else -> println("❌ Opción no válida")
         }
     }
+
+    println("\n🏁 El juego ha terminado. Te has quedado sin fichas.")
 }
 
