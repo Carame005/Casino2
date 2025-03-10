@@ -7,10 +7,9 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 
 Mi proyecto al ser un casino no tiene muchos parametros, los pocos que tienen son el email y la contraseña a la hora de iniciar sesion, el nombre de los juegos y poco más ya que el resto de cosas se manejan con las clases.
 
-```kotlin
-class Login(private val email: String, private val contraseña: String)
-abstract class Juego(val nombre: String)
-```
+[Clase Juego](https://github.com/Carame005/Casino2/blob/master/src/juegos/Juego.kt#L6)
+[Clase Login](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L3)
+
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.h)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
@@ -33,16 +32,12 @@ Por ejemplo, mi código consta de tres paquetes, uno de economía donde guardo d
 - **(4.g, 7.a, 7.b, 7.c, 7.i, 7.j)**: Describe sobre tu código cómo has implementado la herencia y/o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? Mostrando tu código, contesta qué principios has utilizado y qué beneficio has obtenido.
 
 Basicamente está distribuido así:
-```kotlin
-//Clase padre
-abstract class Juego(val nombre: String) {  
-    abstract fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>)
-//Clases que la heredan
-class Tragaperras(nombre: String) : Juego(nombre)
-class Dados(nombre: String) : Juego(nombre)
-class Blackjack(nombre: String) : Juego(nombre)
-class Ruleta(nombre: String) : Juego(nombre)
-```
+[Clase Juego](https://github.com/Carame005/Casino2/blob/master/src/juegos/Juego.kt#L6)
+[BlackJack](https://github.com/Carame005/Casino2/blob/master/src/juegos/Blackjack.kt#L5)
+[Dados](https://github.com/Carame005/Casino2/blob/master/src/juegos/Dados.kt#L5)
+[Ruleta](https://github.com/Carame005/Casino2/blob/master/src/juegos/Ruleta.kt#L5)
+[Tragaperras](https://github.com/Carame005/Casino2/blob/master/src/juegos/Tragaperras.kt#L5)
+
 
 Elegí este método al ser una forma ordenada de clasificar las clases, como las 4 clases hija son juegos comparten algunas funciones comunes como la de apostar o la de solicitarFicha.
 
@@ -69,7 +64,8 @@ Como tal no he implementado librerias externas ya que no me han hecho falta, aun
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
-El IDE de IntelliJidea me da una forma simple de comentar el código
+En el readme estoy dejando enlacess permanentes a fragmentos de código en formato md.
+El IDE de IntelliJidea me da una forma simple de comentar el código.
 Lo he comentado así:
 ```kotlin
 //Texto de ejemplo
@@ -81,39 +77,13 @@ Me he asegurado de describir lo que hace cada método de forma simple, con una p
 
 He implementado dos clases genéricas, fichas y bolsa de fichas. Ambas clases pertenecen al apartado de economía y sirven para manejar la cantidad de fichas que obtienes. Estas fichas podrían haberse cambiado por algún monto pero he preferido hacerlo más bonito usando clases genéricas. La bolsa de fichas cuenta con sus métodos para agregar o devolver una suma del total de fichas.
 
-```kotlin
-class Ficha<T>(val valor: T) {  
-    override fun toString(): String {  
-        return valor.toString()  
-    }  
-}
+[Clase Ficha](https://github.com/Carame005/Casino2/blob/master/src/economia/Ficha.kt#L1-L8)
+[Clase BolsaDeFichas](https://github.com/Carame005/Casino2/blob/master/src/economia/BolsaDeFichas.kt#L4-L16)
 
-class BolsaDeFichas<T : Number> {  
-    private val fichas = mutableListOf<Ficha<T>>()  
-  
-    //Agregar fichas a la bolsa  
-    fun agregarFicha(ficha: Ficha<T>) {  
-        fichas.add(ficha)  
-    }  
-  
-    //Contar el total de fichas  
-    fun totalFichas(): Int {  
-        return maxOf(fichas.sumOf { (it.valor as? Int) ?: 0 }, 0)  
-    }  
-}
-```
 #### **Criterio global 10: Expresiones Regulares**
 - **(6.g)**: Muestra ejemplos de tu código donde hayas utilizado las expresiones regulares. ¿Qué beneficio has obtenido?
 
-```kotlin
-class Login(private val email: String, private val contraseña: String) {  
-    //Expresion regular para validar el correo  
-    private val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$".toRegex()
-	//Funcion para validar el correo electronico  
-	private fun validarCorreo(): Boolean {  
-	    return email.matches(emailRegex)  
-		}
-    }
-```
+[Variable regex](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L5)
+[Metodo para verificar el email](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L15-L17)
 
 Una variable simple para validar el correo electrónico cuando se inicia sesión, esto permite generar una interfaz que aunque sea más que nada decorativa es una buena forma de aplicar expresiones regulares.
