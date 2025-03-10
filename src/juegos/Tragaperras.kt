@@ -3,6 +3,11 @@ import economia.Ficha
 import economia.BolsaDeFichas
 
 class Tragaperras(nombre: String) : Juego(nombre) {
+    //Constante con los simbolos
+    companion object{
+        val SIMBOLOS_DE_RULETA = arrayOf("☆", "♕", "☺", "♢", "7")
+    }
+    //Flujo principal de la tragaperras
     override fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>) {
         println("🎰 Bienvenido a $nombre")
         val ficha = solicitarFicha()
@@ -18,13 +23,13 @@ class Tragaperras(nombre: String) : Juego(nombre) {
             bolsaDeFichas.agregarFicha(Ficha(premio))
         } else {
             println("😢 No ganaste esta vez.")
-            bolsaDeFichas.agregarFicha(Ficha(-ficha.valor))
+            bolsaDeFichas.agregarFicha(Ficha(-ficha.valor)) // Solo restamos al perder
         }
         readln()
     }
-
+    //Funcion para girar la ruleta
     private fun girarRuleta(): Array<String> {
-        val SIMBOLOS_DE_RULETA = arrayOf("☆", "♕", "☺", "♢", "7")
         return Array(3) { SIMBOLOS_DE_RULETA.random() }
     }
 }
+

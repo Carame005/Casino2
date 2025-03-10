@@ -2,8 +2,11 @@ import presentacion.Consola
 import presentacion.Login
 
 fun main() {
-    val login = Login("caramelodecereza@gmail.com", "CarameloDeCereza69")
-    readln()
     val consola = Consola()
+    val (email, contraseña) = consola.obtenerCredenciales()
+    // Llamamos al login
+    val login = Login(email, contraseña)
+    readln()
+    //Llamada a la consola para abrir el casino
     consola.menu()
 }

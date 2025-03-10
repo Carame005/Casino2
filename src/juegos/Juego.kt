@@ -4,19 +4,21 @@ import economia.Ficha
 
 
 abstract class Juego(val nombre: String) {
+    //Funcion principal que varía dependiendo del juego
     abstract fun iniciarJuego(bolsaDeFichas: BolsaDeFichas<Int>)
 
+    //Metodo para apostar fichas
     fun apostar(bolsaDeFichas: BolsaDeFichas<Int>, ficha: Ficha<Int>): Boolean {
-        return if (bolsaDeFichas.quitarFichas(ficha.valor)) {
-            println("💰 Apostaste ${ficha.valor} fichas.")
-            true
+        if (bolsaDeFichas.totalFichas() >= ficha.valor) {
+            return true
         } else {
             println("⚠ No tienes suficientes fichas para apostar esa cantidad.")
-            false
+            return false
         }
     }
 
 
+    //Metodo para solicitar el numero de fichas que desee apostar
     fun solicitarFicha(): Ficha<Int> {
         while (true) {
             println("Ingrese el valor de la ficha a apostar: ")
