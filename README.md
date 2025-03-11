@@ -70,7 +70,7 @@ Los tipos de herencia son:
 #### **Criterio global 7: Librerías de clases**
 - **(2.g, 4.i)**: Describe cualquier librería externa que hayas incorporado en tu proyecto. Explica cómo y por qué las elegiste, y cómo las incorporaste en tu proyecto. ¿Cómo extendió la funcionalidad de tu aplicación? Proporciona ejemplos específicos de su uso en tu proyecto.
 
-Como tal no he implementado librerias externas ya que no me han hecho falta, aunque posiblemente las podría haber incorporado.Un ejemplo de libreria que podria haber incorporado es la de `kotlin.random.Random` para algunas variables que las podrian usar como las de generar numeros de los dados o el BlackJack.Tal vez al login se le podría haber añadido un id y que este se generase automaticamente usando `java.util.UUID`.Son algunos ejemplos de posible aplicacion de estas funciones al proyecto.
+He implementado la libreria `java.util.UUID` y la libreria `java.time.LocalDate` en las variables [ID](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L7) y [fecha](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L8) para que el metodo [iniciarSesion()](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L28-L30) muestre por pantalla la fecha en la que se inició sesion y un id único identificativo para el usuario.Esto hace que la interfaz de inicio de sesion se vea más completa pese a ser meramente estética.
 
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
