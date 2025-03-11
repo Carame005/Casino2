@@ -15,6 +15,7 @@ Mi proyecto al ser un casino no tiene muchos parametros, los pocos que tienen so
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
 
 He definido cómo estático el método para validar el email.Para que se no dependa de una instancia para usarse.
+
 [Metodo etático validar email](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L16-L19)
 
 #### **Criterio global 3: Uso de entornos**
