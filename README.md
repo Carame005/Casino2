@@ -31,7 +31,9 @@ Fuí añadiendo más funciones que mejoraban el programa a nivel estético y a n
 #### **Criterio global 4: Definir clases y su contenido**
 - **(4.a, 4.b, 4.c, 4.d, 4.g)**: Explica sobre un ejemplo de tu código, cómo definiste las clases en tu proyecto, es decir como identificaste las de propiedades, métodos y constructores y modificadores del control de acceso a métodos y propiedades, para representar al objeto del mundo real. ¿Cómo contribuyen estas clases a la solución del problema que tu aplicación aborda?
 
-Por ejemplo, mi código consta de tres paquetes, uno de economía donde guardo dos clases genéricas que se encargan de las fichas del casino, uno de juego con una clase abstracta juego y las subclases de los 4 juegos que elegí y uno de presentación en el que están el login y la consola que es donde el usuario interactúa.
+[Clase BolsaDeFichas](https://github.com/Carame005/Casino2/blob/master/src/economia/BolsaDeFichas.kt#L4-L16)
+
+BolsaDeFichas es una clase genérica que recibe un Number, como parametro fuera del constructor recibe una lista mutable de la clase Ficha y es privada para que no se pueda cambiar su valor, hace uso de dos métodos agregarFicha y totalfichas() que posteriormente serán usados por la clases derivadas de Juego para manejar la economia del casino.
 
 #### **Criterio global 5: Herencia y uso de clases abstractas e interfaces**
 - **(4.g, 7.a, 7.b, 7.c, 7.i, 7.j)**: Describe sobre tu código cómo has implementado la herencia y/o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? Mostrando tu código, contesta qué principios has utilizado y qué beneficio has obtenido.
