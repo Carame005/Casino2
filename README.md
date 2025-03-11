@@ -36,10 +36,15 @@ Por ejemplo, mi código consta de tres paquetes, uno de economía donde guardo d
 - **(4.g, 7.a, 7.b, 7.c, 7.i, 7.j)**: Describe sobre tu código cómo has implementado la herencia y/o utilizado interfaces en tu proyecto. ¿Por qué elegiste este enfoque y cómo beneficia a la estructura de tu aplicación? ¿De qué manera has utilizado los principios SOLID para mejorar el diseño de tu proyecto? Mostrando tu código, contesta qué principios has utilizado y qué beneficio has obtenido.
 
 Basicamente está distribuido así:
+
 [Clase Juego](https://github.com/Carame005/Casino2/blob/master/src/juegos/Juego.kt#L6)
+
 [BlackJack](https://github.com/Carame005/Casino2/blob/master/src/juegos/Blackjack.kt#L5)
+
 [Dados](https://github.com/Carame005/Casino2/blob/master/src/juegos/Dados.kt#L5)
+
 [Ruleta](https://github.com/Carame005/Casino2/blob/master/src/juegos/Ruleta.kt#L5)
+
 [Tragaperras](https://github.com/Carame005/Casino2/blob/master/src/juegos/Tragaperras.kt#L5)
 
 
