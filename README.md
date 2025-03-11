@@ -8,6 +8,7 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 Mi proyecto al ser un casino no tiene muchos parametros, los pocos que tienen son el email y la contraseña a la hora de iniciar sesion, el nombre de los juegos y poco más ya que el resto de cosas se manejan con las clases.
 
 [Clase Juego](https://github.com/Carame005/Casino2/blob/master/src/juegos/Juego.kt#L6)
+
 [Clase Login](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L3)
 
 #### **Criterio global 2: Crear y llamar métodos estáticos**
@@ -88,12 +89,14 @@ Me he asegurado de describir lo que hace cada método de forma simple, con una p
 He implementado dos clases genéricas, fichas y bolsa de fichas. Ambas clases pertenecen al apartado de economía y sirven para manejar la cantidad de fichas que obtienes. Estas fichas podrían haberse cambiado por algún monto pero he preferido hacerlo más bonito usando clases genéricas. La bolsa de fichas cuenta con sus métodos para agregar o devolver una suma del total de fichas.
 
 [Clase Ficha](https://github.com/Carame005/Casino2/blob/master/src/economia/Ficha.kt#L1-L8)
+
 [Clase BolsaDeFichas](https://github.com/Carame005/Casino2/blob/master/src/economia/BolsaDeFichas.kt#L4-L16)
 
 #### **Criterio global 10: Expresiones Regulares**
 - **(6.g)**: Muestra ejemplos de tu código donde hayas utilizado las expresiones regulares. ¿Qué beneficio has obtenido?
 
 [Variable regex](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L5)
+
 [Metodo para verificar el email](https://github.com/Carame005/Casino2/blob/master/src/presentacion/Login.kt#L15-L17)
 
 Una variable simple para validar el correo electrónico cuando se inicia sesión, esto permite generar una interfaz que aunque sea más que nada decorativa es una buena forma de aplicar expresiones regulares.
