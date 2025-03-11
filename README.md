@@ -54,11 +54,10 @@ Basicamente está distribuido así:
 Elegí este método al ser una forma ordenada de clasificar las clases, como las 4 clases hija son juegos comparten algunas funciones comunes como la de apostar o la de solicitarFicha.
 
  Resumen de los principios SOLID aplicados:
-1. **SRP (Responsabilidad Única)**: Cada clase tiene una única responsabilidad.
-2. **OCP (Abierto/Cerrado)**: Puedes extender la funcionalidad sin modificar el código existente.
+1. **SRP (Responsabilidad Única)**: Cada clase tiene una única responsabilidad.Ya que cada clase es un juego distinto con mecánicas distintas.
+2. **OCP (Abierto/Cerrado)**: Puedes extender la funcionalidad sin modificar el código existente.Ya que solo se debe modificar la clase juego para añadir mas funcionalidades.
 3. **LSP (Sustitución de Liskov)**: Las clases hijas pueden reemplazar a la clase base sin problemas.
-4. **ISP (Segregación de la Interfaz)**: Cada clase hija implementa solo lo necesario para su tipo de juego.
-5. **DIP (Inversión de Dependencias)**: No se aplica explícitamente, pero podría aplicarse si hay dependencias externas.
+4. **ISP (Segregación de la Interfaz)**: Cada clase hija implementa solo lo necesario para su tipo de juego.Como se puede ver en cada clase que no hay metodos o funciones demás.
 
 #### **Criterio global 6: Diseño de jerarquía de clases**
 - **(7.d, 7.e, 7.f, 7.g)**: Presenta la jerarquía de clases que diseñaste. ¿Cómo probaste y depuraste esta jerarquía para asegurar su correcto funcionamiento? ¿Qué tipo de herencia has utilizado: Especificación, Especialización, Extensión, Construcción?
@@ -68,7 +67,7 @@ Pues la jerarquía es simple, una clase abstracta y 4 subclases que la heredan. 
 Los tipos de herencia son:
 - **Extensión**: Las clases hijas `Tragaperras`, `Dados`, `Blackjack`, y `Ruleta` extienden la funcionalidad común definida por la clase `Juego`.
 - **Especialización**: Cada clase hija **especializa** la implementación del método `iniciarJuego` para adaptarse a su tipo de juego específico.
-- 
+  
 #### **Criterio global 7: Librerías de clases**
 - **(2.g, 4.i)**: Describe cualquier librería externa que hayas incorporado en tu proyecto. Explica cómo y por qué las elegiste, y cómo las incorporaste en tu proyecto. ¿Cómo extendió la funcionalidad de tu aplicación? Proporciona ejemplos específicos de su uso en tu proyecto.
 
