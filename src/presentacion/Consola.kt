@@ -52,7 +52,7 @@ class Consola() {
         var email: String? = null
         var contraseña: String? = null
 
-        while (email == null || contraseña == null) {
+        while (true) {
             println("Bienvenido, ¿qué desea hacer?")
             println("1. Iniciar sesión")
             println("2. Registrarse")
@@ -60,21 +60,34 @@ class Consola() {
             when (readln().toIntOrNull()) {
                 1 -> {
                     println("📩 Ingrese su email:")
-                    email = readln()
+                    val emailIngresado = readln().lowercase()
 
                     println("🔑 Ingrese su contraseña:")
-                    contraseña = readln()
+                    val contraseñaIngresada = readln()
+
+                    if (Login.validarCorreo(emailIngresado)) {
+                        email = emailIngresado
+                        contraseña = contraseñaIngresada
+                        break
+                    } else {
+                        limpiarPantalla()
+                        println("❌ Correo inválido. Inténtelo de nuevo.")
+                    }
                 }
 
                 2 -> {
                     email = "caramelodecereza@gmail.com"
                     contraseña = "CarameloDeCereza_69"
-                    println("🎉 Registro exitoso. Ahora puedes iniciar sesión.")
+                    break
                 }
 
-                else -> println("❌ Opción inválida. Intente de nuevo.")
+                else ->{
+                    limpiarPantalla()
+                    println("❌ Opción inválida. Intente de nuevo.")
+                }
             }
         }
         return email to contraseña
     }
+
 }
